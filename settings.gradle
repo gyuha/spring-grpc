@@ -1,5 +1,5 @@
 rootProject.name = 'spring-grpc'
-include 'grpc-server'
-include 'grpc-common'
-include 'grpc-client'
+include ':grpc-server'
+include ':grpc-interface'
+include ':grpc-client'
 
