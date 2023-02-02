@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class GrpcController {
     private final GrpcClientService grpcClientService;
 
-    @GetMapping("/{name}")
-    public String grpc(@PathVariable String name) {
-        return grpcClientService.sampleCall(name);
+    @GetMapping("/sync/{name}")
+    public String syncGrpc(@PathVariable String name) {
+        return grpcClientService.syncCall(name);
+    }
+
+    @GetMapping("/async/{name}")
+    public String asyncGrpc(@PathVariable String name) {
+        return grpcClientService.asyncCall(name);
     }
 }

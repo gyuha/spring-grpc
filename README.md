@@ -14,7 +14,7 @@ HTTP/2 기반 전송을 통한 양방향 스트리밍 및 완전히 통합된 �
 
 ---
 ## 프로젝트 설정
-![gRPG](https://yidongnan.github.io/grpc-spring-boot-starter/assets/images/server-project-setup.svg)
+![gRPG](https://techdozo.dev/wp-content/uploads/2021/09/grpc-Page-2.png)
 프로젝트는 크게 3개의 모듈로 분리 됩니다.
 - `인터페이스 모듈` : 원시 protobuf 파일을 포함하고 Java 모델 및 서비스 클래스를 생성합니다. 아마 이 부분을 공유하실 겁니다.
 - `서버 모듈` : 프로젝트의 실제 구현을 포함하고 인터페이스 프로젝트를 종속성으로 사용합니다. (스케줄러에 사용 예정)
@@ -60,6 +60,7 @@ $ grpcurl --plaintext -d "{\"name\": \"test\"}" localhost:9090 net.devh.boot.grp
 
 ### gPRC를 직접 구현
 - [GRPC Quick start](https://grpc.io/docs/languages/java/quickstart/)
+- [gRPC: synchronous and asynchronous unary RPC in Java](https://techdozo.dev/grpc-synchronous-and-asynchronous-unary-rpc-in-java/)
 - [난세의 영웅 gRPC](https://dealicious-inc.github.io/2022/07/11/applying-grpc.html)
 - [gRPC - java gRPC 간단한 사용법](https://coding-start.tistory.com/352)
 - [gRPC Implementation With Spring Boot](https://medium.com/turkcell/grpc-implementation-with-spring-boot-7d6f98349d27)
