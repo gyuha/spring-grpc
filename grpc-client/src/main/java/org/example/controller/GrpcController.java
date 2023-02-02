@@ -17,7 +17,7 @@ public class GrpcController {
     }
 
     @GetMapping("/async/{name}")
-    public String asyncGrpc(@PathVariable String name) {
+    public String asyncGrpc(@PathVariable String name) throws InterruptedException {
         return grpcClientService.asyncCall(name);
     }
 }

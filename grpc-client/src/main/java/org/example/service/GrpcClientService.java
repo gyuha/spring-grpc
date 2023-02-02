@@ -9,7 +9,11 @@ import org.example.grpc.HelloReply;
 import org.example.grpc.HelloRequest;
 import org.example.grpc.MyServiceGrpc;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
@@ -40,24 +44,32 @@ public class GrpcClientService {
         return null;
     }
 
-    public String asyncCall(String name) {
+    public String asyncCall(String name) throws InterruptedException {
+        final CountDownLatch finishLatch = new CountDownLatch(1);
         var request = HelloRequest.newBuilder().setName(name).build();
+        final String[] text = new String[1];
         asyncStub.sayHello(request, new StreamObserver<HelloReply>() {
             @Override
             public void onNext(HelloReply value) {
+                text[0] = value.getMessage();
                 log.info(value.getMessage());
             }
 
             @Override
             public void onError(Throwable t) {
+                finishLatch.countDown();
                 t.printStackTrace();
             }
 
             @Override
             public void onCompleted() {
                 log.info("GrpcClient - onCompleted");
+                finishLatch.countDown();
             }
         });
-        return "";
+
+        finishLatch.await(1, TimeUnit.MINUTES);
+
+        return text[0];
     }
 }
