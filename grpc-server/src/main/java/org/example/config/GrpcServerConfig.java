@@ -4,7 +4,9 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.grpc.User;
 import org.example.service.GrpcService;
+import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +19,11 @@ public class GrpcServerConfig {
     Integer grpcPort;
 
     private final GrpcService grpcService;
+    private final UserService userService;
 
     @Bean
     public Server grpcServer() {
         log.info("### Grpc port : " + grpcPort);
-        return ServerBuilder.forPort(grpcPort).addService(grpcService).build();
+        return ServerBuilder.forPort(grpcPort).addService(grpcService).addService(userService).build();
     }
 }
